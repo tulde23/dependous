@@ -1,0 +1,12 @@
+C:\Development\Dependous\src\Dependous.Grace\bin\Debug\netstandard2.0\Dependous.dll
+C:\Development\Dependous\src\Dependous.Grace\bin\Debug\netstandard2.0\Dependous.pdb
+C:\Development\Dependous\src\Dependous.Grace\obj\Debug\netstandard2.0\Dependous.Grace.csproj.CoreCompileInputs.cache
+C:\Development\Dependous\src\Dependous.Grace\obj\Debug\netstandard2.0\Dependous.Grace.AssemblyInfoInputs.cache
+C:\Development\Dependous\src\Dependous.Grace\obj\Debug\netstandard2.0\Dependous.Grace.AssemblyInfo.cs
+C:\Development\Dependous\src\Dependous.Grace\obj\Debug\netstandard2.0\Dependous.Grace.csproj.CopyComplete
+C:\Development\Dependous\src\Dependous.Grace\bin\Debug\netstandard2.0\Dependous.GraceIoc.deps.json
+C:\Development\Dependous\src\Dependous.Grace\bin\Debug\netstandard2.0\Dependous.GraceIoc.dll
+C:\Development\Dependous\src\Dependous.Grace\bin\Debug\netstandard2.0\Dependous.GraceIoc.pdb
+C:\Development\Dependous\src\Dependous.Grace\obj\Debug\netstandard2.0\Dependous.GraceIoc.dll
+C:\Development\Dependous\src\Dependous.Grace\obj\Debug\netstandard2.0\Dependous.GraceIoc.pdb
+C:\Development\Dependous\src\Dependous.Grace\obj\Debug\netstandard2.0\Dependous.Grace.csprojAssemblyReference.cache

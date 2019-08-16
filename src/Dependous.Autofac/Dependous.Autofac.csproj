@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <PackageId>Dependous.AutoFac</PackageId>
+    <Authors>Jason Tully</Authors>
+    <Company>Blue Sombrero</Company>
+    <Product>Dependous</Product>
+    <Description>
+      A lightweight cross platform dependency scanning library
+      Dependous grants you the power to insepct a collection of .NET assemblies and extract types implementing specific interfaces. That's it. Simple and easy.
+
+      This package combines Dependous and an add-on for AutoFac container registration
+    </Description>
+    <PackageLicenseUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageLicenseUrl>
+    <PackageProjectUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageProjectUrl>
+    <RepositoryUrl>https://bitbucket.org/bsbdevelopment/dependous/src</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Scanning, Dependency, IOC</PackageTags>
+    <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+    <AssemblyVersion>4.0.3.0</AssemblyVersion>
+    <FileVersion>4.0.3.0</FileVersion>
+    <Version>4.0.3</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <!-- Conditionally obtain references for the .NET Framework netstandard2.0 target -->
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
+  </ItemGroup>
+
+  <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoFac" Version="4.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dependous\Dependous.csproj" />
+  </ItemGroup>
+</Project>

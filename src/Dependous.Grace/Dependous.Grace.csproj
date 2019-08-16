@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageId>Dependous.Grace</PackageId>
+    <Authors>Jason Tully</Authors>
+    <Company>Blue Sombrero</Company>
+    <Product>Dependous</Product>
+    <Description>
+      Implements registration using the Grace IOC container
+    </Description>
+    <PackageLicenseUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageLicenseUrl>
+    <PackageProjectUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageProjectUrl>
+    <RepositoryUrl>https://bitbucket.org/bsbdevelopment/dependous/src</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Scanning, Dependency, IOC</PackageTags>
+    <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+    <AssemblyVersion>1.0.8.0</AssemblyVersion>
+    <FileVersion>1.0.8.0</FileVersion>
+    <Version>1.0.8</Version>
+    <AssemblyName>Dependous.GraceIoc</AssemblyName>
+  </PropertyGroup>
+  <!-- Conditionally obtain references for the .NET Framework netstandard2.0 target -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Grace.AspNetCore.Hosting" Version="6.3.0" />
+  </ItemGroup>
+
+  <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
+
+  <ItemGroup>
+    <PackageReference Include="Grace" Version="6.3.3" />
+    <PackageReference Include="Grace.AspNetCore.MVC" Version="6.3.0" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dependous\Dependous.csproj" />
+  </ItemGroup>
+ 
+</Project>

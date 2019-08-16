@@ -1,0 +1,10 @@
+C:\Development\Dependous\src\Dependous.Autofac\bin\Release\net45\Dependous.Autofac.dll
+C:\Development\Dependous\src\Dependous.Autofac\bin\Release\net45\Dependous.Autofac.pdb
+C:\Development\Dependous\src\Dependous.Autofac\bin\Release\net45\Autofac.dll
+C:\Development\Dependous\src\Dependous.Autofac\bin\Release\net45\Dependous.dll
+C:\Development\Dependous\src\Dependous.Autofac\bin\Release\net45\Dependous.pdb
+C:\Development\Dependous\src\Dependous.Autofac\obj\Release\net45\Dependous.Autofac.csproj.CoreCompileInputs.cache
+C:\Development\Dependous\src\Dependous.Autofac\obj\Release\net45\Dependous.Autofac.AssemblyInfoInputs.cache
+C:\Development\Dependous\src\Dependous.Autofac\obj\Release\net45\Dependous.Autofac.AssemblyInfo.cs
+C:\Development\Dependous\src\Dependous.Autofac\obj\Release\net45\Dependous.Autofac.dll
+C:\Development\Dependous\src\Dependous.Autofac\obj\Release\net45\Dependous.Autofac.pdb

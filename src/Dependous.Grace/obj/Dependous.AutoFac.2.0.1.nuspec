@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Dependous.AutoFac</id>
+    <version>2.0.1</version>
+    <authors>Jason Tully</authors>
+    <owners>Jason Tully</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://bitbucket.org/bsbdevelopment/dependous/src</licenseUrl>
+    <projectUrl>https://bitbucket.org/bsbdevelopment/dependous/src</projectUrl>
+    <description>A lightweight cross platform dependency scanning library
+      Dependous grants you the power to insepct a collection of .NET assemblies and extract types implementing specific interfaces. That's it. Simple and easy.
+
+      This package combines Dependous and an add-on for AutoFac container registration</description>
+    <releaseNotes>Initial Release</releaseNotes>
+    <tags>Scanning, Dependency, IOC</tags>
+    <repository type="Git" url="https://bitbucket.org/bsbdevelopment/dependous/src" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Dependous" version="2.0.1" exclude="Build,Analyzers" />
+        <dependency id="AutoFac" version="4.6.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Dependous" version="2.0.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection" version="2.0.0" exclude="Build,Analyzers" />
+        <dependency id="Autofac.Extensions.DependencyInjection" version="4.2.0" exclude="Build,Analyzers" />
+        <dependency id="AutoFac" version="4.6.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Development\Dependous\src\Dependous.Autofac\bin\Release\netstandard2.0\Dependous.Autofac.dll" target="lib\netstandard2.0\Dependous.Autofac.dll" />
+    <file src="C:\Development\Dependous\src\Dependous.Autofac\bin\Release\net45\Dependous.Autofac.dll" target="lib\net45\Dependous.Autofac.dll" />
+  </files>
+</package>
