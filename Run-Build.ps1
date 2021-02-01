@@ -113,8 +113,8 @@ $apiKey = $buildInfo.apiKey
 $sourceNugetExe = $buildInfo.nugetExe
 $targetNugetExe = ".\nuget.exe"
 $fileExists = Test-Path $targetNugetExe
-$projectName = "Dependous"
-$projects = ( "Dependous", "Dependous.Autofac")
+$projectName = "SportsConnect.Dependous"
+$projects = ( "SportsConnect.Dependous", "SportsConnect.Dependous.Autofac")
 
 logger "Starting Build With Following Options:"
 logger "NuGet Api: $endpoint`nApiKey: $apiKey`nNugetExe:$sourceNugetExe`n"

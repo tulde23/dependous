@@ -20,7 +20,7 @@ namespace Dependous.Tests.AutoFacTests.DecorationTests
             output = outputHelper;
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddDependencyScanning();
-            container = serviceCollection.BuildAutoFacContainer((f) => f.StartsWith("Dependous"),
+            container = serviceCollection.BuildAutoFacContainer(AssemblyPaths.From("SportsConnect", "Dependous"),
                 logger: (item) => { output.WriteLine($"{item}"); Console.WriteLine(item); });
         }
 

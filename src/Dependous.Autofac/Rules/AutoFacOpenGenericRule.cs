@@ -67,8 +67,8 @@ namespace Dependous.Autofac.Rules
                         DependencyKey = dependencyMetadata.NamedDependency,
                         ServiceLifetime = dependencyMetadata.ServiceLifetime.ToString()
                     });
-                    return new RegistrationResult(this, true, results);
                 }
+                return new RegistrationResult(this, true, results);
             }
             return new RegistrationResult(this, false);
         }

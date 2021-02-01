@@ -2,8 +2,10 @@
 using System.Linq;
 using Autofac;
 using Castle.DynamicProxy;
+using Dependous.Contracts;
 using Dependous.Models;
 using Dependous.Test;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
@@ -78,13 +80,15 @@ namespace Dependous.AutoFacTests
         {
             output = outputHelper;
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddDependencyScanning();
-            container = serviceCollection.BuildAutoFacContainer((f) => f.StartsWith("Dependous"),
+            serviceCollection.AddSingleton<MyObject>();
+            serviceCollection.AddSingleton(new TestObject());
+            serviceCollection.AddDependencyScanning( b=>b.AddSingleton<MyObject>().AddSingleton( new TestObject() ));
+            container = serviceCollection.BuildAutoFacContainer(AssemblyPaths.From("Dependous"),
                 logger: (item) => { output.WriteLine($"{item}"); Console.WriteLine(item); }, configurationBuilder: (cb) =>
                  {
                      cb.PersistScanResults = true;
-                     cb.InterceptAll<DynamicInterceptor>();
-                     cb.AddProbingPaths(pb => pb.AddProbingPath("../../../../../tests/Dependous.Probing/bin/Debug/netstandard2.0", (p) => p.StartsWith("Dependous.Probing")));
+                   //  cb.InterceptAll<DynamicInterceptor>();
+                     cb.AddProbingPaths(pb => pb.AddProbingPath("../../../../../tests/Dependous.Probing/bin/Debug/netstandard2.1", (p) => p.StartsWith("Dependous.Probing")));
                  });
         }
 
@@ -123,11 +127,56 @@ namespace Dependous.AutoFacTests
             Assert.NotNull(service);
         }
 
+        [Fact(DisplayName = "Integration Test - Can Resolve Self")]
+        public void WithSelf()
+        {
+            var service = container.Resolve<MyObject>();
+            Assert.NotNull(service);
+            service.Test().Should().NotBeNull();
+
+            var test2 = container.Resolve<TestObject>();
+            Assert.NotNull(test2);
+            test2.Test().Should().NotBeNull();
+
+            var test3 = container.Resolve<Hello>();
+            test3.Should().NotBeNull();
+        }
+
         [Fact(DisplayName = "Integration Test - Can Resolve Scan Results")]
         public void GetScanResults()
         {
             var results = container.Resolve<DependencyScanResult>();
             Assert.NotNull(results);
         }
+    }
+
+    public class MyObject
+    {
+        private readonly IProbeMe _probeMe;
+
+        public MyObject(IProbeMe probeMe)
+        {
+            _probeMe = probeMe;
+        }
+
+        public string Name { get; set; } = "test";
+
+        public string Test()
+        {
+            return _probeMe.GetHashCode().ToString();
+        }
+    }
+
+    public class TestObject
+    {
+        public string Test()
+        {
+            return DateTime.Now.Ticks.ToString();
+        }
+    }
+
+    public class Hello : ISelfTransient
+    {
+       
     }
 }

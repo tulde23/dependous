@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Autofac;
 using Dependous.Autofac.Models;
 
@@ -38,29 +37,9 @@ namespace Dependous.Autofac.Rules
                 //user has defined interception
                 if (dependencyMetadata.Interceptor != null)
                 {
-                   // rb.EnableClassInterceptors();
-                  //  rb.InterceptedBy(dependencyMetadata.Interceptor);
+                    // rb.EnableClassInterceptors();
+                    //  rb.InterceptedBy(dependencyMetadata.Interceptor);
                     Builder.RegisterType(dependencyMetadata.Interceptor);
-                }
-                else if (Configuration.InterceptableTypes != null && Configuration.InterceptableTypes.Any())
-                {
-                    if (Configuration.InterceptableTypes.Any(x => x.TypeToIntercept.Equals(typeof(TypeAll))))
-                    {
-                        var i = Configuration.InterceptableTypes.FirstOrDefault(x => x.TypeToIntercept.Equals(typeof(TypeAll)));
-                        //rb.EnableClassInterceptors();
-                        //rb.InterceptedBy(i.InterceptionType);
-                        //Builder.RegisterType(i.InterceptionType);
-                    }
-                    else
-                    {
-                        var classInterception = Configuration.InterceptableTypes.FirstOrDefault(x => x.TypeToIntercept.IsAssignableFrom(dependencyMetadata.DependencyType));
-                        if (classInterception != null)
-                        {
-                            //rb.EnableClassInterceptors();
-                            //rb.InterceptedBy(classInterception.InterceptionType);
-                            Builder.RegisterType(classInterception.InterceptionType);
-                        }
-                    }
                 }
 
                 results.Add(new DependencyRegistration

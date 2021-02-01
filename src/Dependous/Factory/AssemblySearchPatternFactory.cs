@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// A Fluent API for building search predicates that will be used to filter the list of assemblies to scan.
@@ -80,6 +81,44 @@
         {
             this.Patterns.Add(new Custom(pattern));
             return this;
+        }
+
+        /// <summary>
+        /// Creates this instance.
+        /// </summary>
+        /// <returns></returns>
+        public static AssemblySearchPatternFactory Create()
+        {
+            return new AssemblySearchPatternFactory();
+        }
+
+        /// <summary>
+        /// Merges the specified source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="target">The target.</param>
+        public static void Merge(AssemblySearchPatternFactory source, AssemblySearchPatternFactory target)
+        {
+            if (source != null && target != null)
+            {
+                target.Patterns.AddRange(source.Patterns);
+            }
+        }
+
+        /// <summary>
+        /// Merges the specified source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="target">The target.</param>
+        public static void Merge(AssemblyPaths source, AssemblySearchPatternFactory target)
+        {
+            if (source?.Paths?.Any() == true && target != null)
+            {
+                foreach (var item in source.Paths)
+                {
+                    target.StartsWith(item);
+                }
+            }
         }
     }
 }

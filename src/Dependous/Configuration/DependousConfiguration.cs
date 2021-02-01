@@ -23,7 +23,8 @@
             this.AddAdditionalDiscoveryTypes(b =>
                 b.RegisterType<ISingletonDependency>(ServiceLifetime.Singleton)
                   .RegisterType<ITransientDependency>(ServiceLifetime.Transient)
-                  .RegisterType<ISelf>(ServiceLifetime.Transient)
+                  .RegisterType<ISelfTransient>(ServiceLifetime.Transient)
+                  .RegisterType<ISelfSingleton>(ServiceLifetime.Singleton)
                   .RegisterType<IScopedDependency>(ServiceLifetime.Scoped));
         }
 

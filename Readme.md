@@ -17,7 +17,13 @@ Designates an implementor as a discoverable dependency and asserts it's lifetime
 **IScopedDependency**
 Designates an implementor as a discoverable dependency and asserts it's lifetime management should be scoped.
 
-These three interfaces only assert your intent on how instances of your dependency should be handled.   This will be captured in the `DependencyMetadata` instance.
+**ISelfTransient**
+Makes a concrete type injectable through the IOC container and sets it's lifetime to trainsient
+
+**ISelfSingleton**
+Makes a concrete type injectable through the IOC container and sets it's lifetime to singleton
+
+These five interfaces only assert your intent on how instances of your dependency should be handled.   This will be captured in the `DependencyMetadata` instance.
 It's up to the IOC container integration to actually register your dependencies.
 
 When declaring discovery interfaces, you must bind it to a specific lifetime.  Either Singleton, Transient or Scoped.
@@ -30,6 +36,16 @@ var scanner     = DependencyScannerFactory.Create();
 var scanResult = scanner.Scan((f) => f.StartsWith("MyAssembly"));
 ```
 
+##### Register a concrete type #####
+```
+public class MyModel : ISelfTransient{
+   
+    public MyModel( ISomeDependency d){
+    }
+}
+
+now you can inject MyModel wherever you please.
+```
 
 ##### Adding Additional Discovery Interfaces #####
 ``` csharp
@@ -95,51 +111,42 @@ public class MyService{
 ## IOC Container Integration ##
 Now that we have a list of dependencies what do we do with them?  It's time to integrate an IOC container.  For this example, I chose [AutoFac](http://docs.autofac.org/en/latest/getting-started/index.html).
 
-##### .NET 4.5 
-``` csharp 
-
-public static void Main(string[] args){
-    var container = Dependous.Autofac.AutofacContainerFactory.BuildContainer(
-        (f) => f.StartsWith("Dependous"),
-        logger: (item) => { Console.WriteLine(item); }
-     );
-}
-
-```
-
-##### ASP.NET 
-``` csharp 
-
-
-public class Global : HttpApplication
-{
-    void Application_Start(object sender, EventArgs e)
-    {
-        // Code that runs on application startup
-          var container = Dependous.Autofac.AutofacContainerFactory.BuildContainer(
-        (f) => f.StartsWith("Dependous"),
-        logger: (item) => { Console.WriteLine(item); }
-     );
-    }
-}
-
-```
 For more info on integrating Autofac into ASP.NET go [here](http://autofac.readthedocs.io/en/latest/integration/webapi.html#quick-start)
 
-##### .NET Core
+##### .NET Core 3.1
 ``` csharp
- /// <summary>
-/// Configures the services.
-/// </summary>
-/// <param name="services">The services.</param>
-public IServiceProvider ConfigureServices(IServiceCollection services)
-{
-   services.AddDependencyScanning();
-  container = services.BuildAutoFacContainer(
-        (f) => f.StartsWith("Dependous"), 
-        logger: (item) => { Console.WriteLine(item); });
-  return container.Resolve<IServiceProvider>();
-}
+
+# Program.cs
+using System;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+ public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+            .UseAutoFacContainer(AssemblyPaths.From("Dependous"), logger: (o) => Console.WriteLine($"{o}"))
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+
+#Statup.cs
+
+ public void ConfigureServices(IServiceCollection services)
+        {
+             ...
+            services.AddControllers();
+            services.AddDependencyScanning();
+        }
+
+
 ```
 ###### Configuring Probing Paths With AutoFac
 ``` csharp
@@ -215,56 +222,39 @@ public class ConsumerFactory : IConsumerFactory{
 
 
 ### Implement a Decorator With AutoFac
-Unfortunately, Dependous can't scan and automatically register decorators.  However, with a bit of configure code you can achieve this.
-First of, let's create a `RegistrationModule' that will abstract all of our custom AutoFac registrations.
+
+Decoration can be achieved quite easily by implementing a specific interface, `IDecorator`
+
 ``` csharp
-public class RegistrationModule
+  public interface IDecoratableService : ISingletonDependency
     {
-        /// <summary>
-        /// Override to add registrations to the container.
-        /// </summary>
-        /// <param name="builder">The builder through which components can be
-        /// registered.</param>
-        /// <remarks>
-        /// Note that the ContainerBuilder parameter is unique to this module.
-        /// </remarks>
-        public static void Load(ContainerBuilder builder)
+        string Method();
+    }
+
+ public class TrueService : IDecoratableService
+    {
+        public string Method()
         {
-            //decorates or proxies the real implementation of INationalAffiliationLookupService. we are doing this to provide AOP style caching
-            builder.RegisterType<SqlNationalAffiliationLookupService>().Named<INationalAffiliationLookupService>("decoratable");
-            builder.RegisterDecorator<INationalAffiliationLookupService>(
-                    (c, inner) => new NationalAffiliationLookupServiceDecorator(inner, c.Resolve<ICache>()),
-                    fromKey: "decoratable"
-                ).As<IExpirable>().As<INationalAffiliationLookupService>().SingleInstance();
-
-
+            return $"Hello";
         }
     }
 
-//this is your decorator.  Now when you request an instance of `INationalAffiliationLookupService`, this will be returned and the
-true implemenation SqlNationalAffiliationLookupService will be injected into your decorator.  
-  public class NationalAffiliationLookupServiceDecorator : INationalAffiliationLookupService, IExpirable
-    {
-        private const int CacheTimeout = 18000;
-        private static ConcurrentDictionary<string, string> _keyCache = new ConcurrentDictionary<string, string>();
-        private readonly ICache _cache;
-
-        //5 hours
-        private readonly INationalAffiliationLookupService _nationalAffiliationLookupService;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NationalAffiliationLookupServiceDecorator" /> class.
-        /// </summary>
-        /// <param name="nationalAffiliationLookupService">The national affiliation lookup service.</param>
-        /// <param name="cache">The cache.</param>
-        public NationalAffiliationLookupServiceDecorator(INationalAffiliationLookupService nationalAffiliationLookupService,
-            ICache cache)
+public class DecoratorOfTrueService : IDecoratableService, IDecorator<IDecoratableService>
+{   public DecoratorOfTrueService(IDecoratableService decoratableService)
         {
-            _nationalAffiliationLookupService = nationalAffiliationLookupService;
-            _cache = cache;
+            DecoratableService = decoratableService;
+        }
+
+        public IDecoratableService DecoratableService { get; }
+
+        public string Method()
+        {
+            var sb = new StringBuilder();
+            sb.Append("DecoratorOfTrueService.Before");
+            sb.Append(DecoratableService.Method());
+            sb.Append("DecoratorOfTrueService.After");
+            return sb.ToString();
         }
 }
 
-//Next go to Startup.cs and pass an overload to BuildAutoFacContainer
-    ApplicationContainer = services.BuildAutoFacContainer(assemblyNameFilter, containerBuilder: (cb) => RegistrationModule.Load(cb));
 ```

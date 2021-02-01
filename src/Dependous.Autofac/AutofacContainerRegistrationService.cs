@@ -20,7 +20,8 @@ namespace Dependous
             typeof(AutoFacModuleRegistrationRule),
             typeof(AutoFacRegistrationSourceRule),
             typeof(AutoFacRegistrationRule),
-            typeof(SelfRule)
+            typeof(SelfRule),
+            typeof(AutoFacDecoratorRule)
         };
 
         /// <summary>
@@ -47,6 +48,12 @@ namespace Dependous
             this.Builder = builder;
         }
 
+        public AutoFacContainerRegistrationService(ContainerBuilder builder, IDependousConfiguration dependousConfiguration)
+        {
+            _dependousConfiguration = dependousConfiguration;
+            Builder = builder;
+        }
+
         /// <summary>
         /// Registers all the specified services.
         /// </summary>
@@ -71,7 +78,9 @@ namespace Dependous
         /// <returns></returns>
         public IContainer CreateContainer()
         {
-            return this.Builder.Build();
+            var container = this.Builder.Build();
+       
+            return container;
         }
     }
 }

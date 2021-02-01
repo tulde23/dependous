@@ -12,7 +12,7 @@ namespace Dependous.Tests
             var result = instance.Scan((b) => 
                 b.StartsWith("Junk"), 
                     (c) => c.AddProbingPaths(pb => 
-                                pb.AddProbingPath("../../../../../tests/Dependous.Probing/bin/Debug/netstandard2.0", (p)=>p.StartsWith("Dependous.Probing"))));
+                                pb.AddProbingPath("../../../../../tests/Dependous.Probing/bin/Debug/netstandard2.1", (p)=>p.StartsWith("Dependous.Probing"))));
             Assert.True(result.Metadata.Any());
         }
     }

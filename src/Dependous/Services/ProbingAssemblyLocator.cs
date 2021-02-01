@@ -12,7 +12,7 @@ namespace Dependous.Services
         /// <summary>
         /// The extensions
         /// </summary>
-        private readonly string[] extensions = new string[2] { ".dll", ".exe" };
+        private readonly string[] _extensions = new string[2] { ".dll", ".exe" };
 
         public AssemblyLocatorResult Locate(Func<AssemblySearchPatternFactory, AssemblySearchPatternFactory> assemblyNameFilter,
             IDependousConfiguration dependousConfiguration)
@@ -36,7 +36,7 @@ namespace Dependous.Services
                     var assemblies = new DirectoryInfo(path.Path)
                                                 .EnumerateFiles()
                                                 .Where(name => factory.Patterns.Any(x => x.Match(name.Name)) &&
-                                                         this.extensions.Contains(name.Extension, StringComparer.OrdinalIgnoreCase));
+                                                         this._extensions.Contains(name.Extension, StringComparer.OrdinalIgnoreCase));
                     results.AddRange(assemblies);
                 }
                 return new AssemblyLocatorResult(results.Select(a =>

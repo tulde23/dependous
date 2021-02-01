@@ -10,7 +10,7 @@ namespace Dependous.Autofac
     /// <summary>
     ///
     /// </summary>
-    public static class AutofacContainerFactory
+    internal static class AutofacContainerFactory
     {
         /// <summary>
         /// Scans for dependencies and builds the autofac container.
@@ -64,7 +64,9 @@ namespace Dependous.Autofac
             containerConfigurator?.Invoke(containerRegistrationService.Builder, scanResults.Metadata);
             var allRegistrations = containerRegistrationService.RegisterAll(scanResults.Metadata);
             logger($"Registered {allRegistrations.Count()} dependencies.");
-            return containerRegistrationService.Builder.Build();
+
+            var container = containerRegistrationService.Builder.Build();
+            return container;
         }
     }
 }

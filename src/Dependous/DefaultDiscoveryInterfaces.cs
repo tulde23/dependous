@@ -6,19 +6,19 @@ namespace Dependous
 {
     internal static class DefaultDiscoveryInterfaces
     {
-        private static readonly List<Type> discoveryInterfaces = new List<Type>()
+        private static readonly List<Type> _discoveryInterfaces = new List<Type>()
                 {
                   typeof(ISingletonDependency),
                  typeof(ITransientDependency),
                  typeof(IScopedDependency),
-                 typeof(ISelf)
+                 typeof(ISelfTransient)
                 };
 
         public static IReadOnlyCollection<Type> Interfaces
         {
             get
             {
-                return discoveryInterfaces;
+                return _discoveryInterfaces;
             }
         }
     }

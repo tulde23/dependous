@@ -70,5 +70,15 @@ function logger(){
 
     Write-Host -BackgroundColor $BackgroundColor -ForegroundColor $ForegroundColor $msg;
 }
-
+if( $configuration -eq "DEBUG"  -or $configuration -eq "debug"){
+	RemoveExistingNuGetPackages
+	GenerateNugetPackage
+	if( [string]::IsNullOrEmpty($nugetPath) -eq $false){
+		DeployToLocalNuGetShare
+		DeleteNuGetPackageFolder
+	}
+}
+else{
+	Write-Host "Configuration Is Not Debug.  PostCompile step will be skipped."
+}
 

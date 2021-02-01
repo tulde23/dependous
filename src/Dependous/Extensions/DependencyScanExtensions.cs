@@ -1,6 +1,4 @@
-﻿#if NETSTANDARD2_0|| NETSTANDARD2_1
-
-namespace Microsoft.Extensions.DependencyInjection
+﻿namespace Microsoft.Extensions.DependencyInjection
 {
     using System;
     using Dependous;
@@ -91,5 +89,3 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 }
-
-#endif
