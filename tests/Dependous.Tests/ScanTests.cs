@@ -44,7 +44,7 @@ namespace Dependous.Tests
         public void TestScanProducesSomeResults()
         {
             var instance = DependencyScannerFactory.Create();
-            var scanResult = instance.Scan((f) => f.StartsWith("Dependous.Test.Common"), c=>c.AddProbingPaths(pb=>pb.AddProbingPath("../../../../../tests/Dependous.Probing/bin/Debug/netstandard2.0")));
+            var scanResult = instance.Scan((f) => f.StartsWith("Dependous.Test.Common"), c=>c.AddProbingPaths(pb=>pb.AddProbingPath("../../../../../tests/Dependous.Probing/bin/Debug/netstandard2.1")));
             Assert.True(scanResult.Metadata.Any());
         }
 

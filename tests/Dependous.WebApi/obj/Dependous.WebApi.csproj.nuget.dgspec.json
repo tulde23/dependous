@@ -1,26 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Development\\Dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {}
+    "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Development\\Dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
-      "version": "1.0.6",
+    "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
+      "version": "6.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development\\Dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
+        "projectUniqueName": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
         "projectName": "Dependous.AutoFac",
-        "projectPath": "C:\\Development\\Dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
+        "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
         "packagesPath": "C:\\Users\\jtully\\.nuget\\packages\\",
-        "outputPath": "C:\\Development\\Dependous\\src\\Dependous.Autofac\\obj\\",
+        "outputPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\jtully\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -28,15 +28,14 @@
         "sources": {
           "C:\\LocalNuget": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://artifactory.bsbinternal.com/artifactory/api/nuget/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Development\\Dependous\\src\\Dependous\\Dependous.csproj": {
-                "projectPath": "C:\\Development\\Dependous\\src\\Dependous\\Dependous.csproj"
+              "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj": {
+                "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj"
               }
             }
           }
@@ -53,19 +52,19 @@
           "dependencies": {
             "AutoFac": {
               "target": "Package",
-              "version": "[6.1.0, )"
+              "version": "[6.3.0, )"
             },
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[7.1.0, )"
+              "version": "[7.2.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -83,27 +82,27 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Development\\Dependous\\src\\Dependous\\Dependous.csproj": {
-      "version": "1.0.0",
+    "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj": {
+      "version": "6.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development\\Dependous\\src\\Dependous\\Dependous.csproj",
+        "projectUniqueName": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj",
         "projectName": "Dependous",
-        "projectPath": "C:\\Development\\Dependous\\src\\Dependous\\Dependous.csproj",
+        "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj",
         "packagesPath": "C:\\Users\\jtully\\.nuget\\packages\\",
-        "outputPath": "C:\\Development\\Dependous\\src\\Dependous\\obj\\",
+        "outputPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\jtully\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -111,7 +110,6 @@
         "sources": {
           "C:\\LocalNuget": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://artifactory.bsbinternal.com/artifactory/api/nuget/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -150,46 +148,45 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Development\\Dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {
+    "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development\\Dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
+        "projectUniqueName": "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
         "projectName": "Dependous.WebApi",
-        "projectPath": "C:\\Development\\Dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
+        "projectPath": "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
         "packagesPath": "C:\\Users\\jtully\\.nuget\\packages\\",
-        "outputPath": "C:\\Development\\Dependous\\tests\\Dependous.WebApi\\obj\\",
+        "outputPath": "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\jtully\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\LocalNuget": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://artifactory.bsbinternal.com/artifactory/api/nuget/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Development\\Dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
-                "projectPath": "C:\\Development\\Dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj"
+              "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
+                "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj"
               },
-              "C:\\Development\\Dependous\\src\\Dependous\\Dependous.csproj": {
-                "projectPath": "C:\\Development\\Dependous\\src\\Dependous\\Dependous.csproj"
+              "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj": {
+                "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj"
               }
             }
           }
@@ -201,8 +198,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "imports": [
             "net461",
             "net462",
@@ -221,7 +218,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
