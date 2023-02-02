@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Dependous.Autofac.Models;
-using Dependous.Contracts;
 
 namespace Dependous.Autofac.Rules
 {

@@ -14,7 +14,10 @@ namespace Dependous.WebApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .UseAutoFacContainer(AssemblyPaths.From("Dependous"), logger: (o) => Console.WriteLine($"{o}"))
+            .UseAutoFacContainer(AssemblyPaths.From("Dependous"), logger: (o) => Console.WriteLine($"{o}"), containerBuilder: (c) =>{
+               
+                    
+            })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

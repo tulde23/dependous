@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {}
+    "C:\\Development-Personal\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
-      "version": "6.0.0",
+    "C:\\Development-Personal\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
+      "version": "7.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
+        "projectUniqueName": "C:\\Development-Personal\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
         "projectName": "Dependous.AutoFac",
-        "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
+        "projectPath": "C:\\Development-Personal\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj",
         "packagesPath": "C:\\Users\\jtully\\.nuget\\packages\\",
-        "outputPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\obj\\",
+        "outputPath": "C:\\Development-Personal\\dependous\\src\\Dependous.Autofac\\obj\\",
         "projectStyle": "PackageReference",
+        "crossTargeting": true,
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\jtully\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -23,19 +23,29 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
+          "netstandard2.0",
           "netstandard2.1"
         ],
         "sources": {
-          "C:\\LocalNuget": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/legacyhss/_packaging/IME/nuget/v3/index.json": {}
         },
         "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {
+              "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj": {
+                "projectPath": "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj"
+              }
+            }
+          },
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj": {
-                "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj"
+              "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj": {
+                "projectPath": "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj"
               }
             }
           }
@@ -47,24 +57,30 @@
         }
       },
       "frameworks": {
-        "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
           "dependencies": {
             "AutoFac": {
               "target": "Package",
-              "version": "[6.3.0, )"
+              "version": "[6.5.0, )"
             },
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[8.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
             }
           },
           "imports": [
@@ -73,7 +89,41 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        },
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "AutoFac": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -82,22 +132,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj": {
-      "version": "6.0.0",
+    "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj": {
+      "version": "7.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj",
+        "projectUniqueName": "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj",
         "projectName": "Dependous",
-        "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj",
+        "projectPath": "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj",
         "packagesPath": "C:\\Users\\jtully\\.nuget\\packages\\",
-        "outputPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\obj\\",
+        "outputPath": "C:\\Development-Personal\\dependous\\src\\Dependous\\obj\\",
         "projectStyle": "PackageReference",
+        "crossTargeting": true,
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\jtully\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -105,14 +155,20 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
+          "netstandard2.0",
           "netstandard2.1"
         ],
         "sources": {
-          "C:\\LocalNuget": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/legacyhss/_packaging/IME/nuget/v3/index.json": {}
         },
         "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          },
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {}
@@ -125,12 +181,18 @@
         }
       },
       "frameworks": {
-        "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
           "dependencies": {
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[7.0.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
             }
           },
           "imports": [
@@ -139,7 +201,29 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        },
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -148,22 +232,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {
+    "C:\\Development-Personal\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
+        "projectUniqueName": "C:\\Development-Personal\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
         "projectName": "Dependous.WebApi",
-        "projectPath": "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
+        "projectPath": "C:\\Development-Personal\\dependous\\tests\\Dependous.WebApi\\Dependous.WebApi.csproj",
         "packagesPath": "C:\\Users\\jtully\\.nuget\\packages\\",
-        "outputPath": "C:\\Development-OpenSource\\dependous\\tests\\Dependous.WebApi\\obj\\",
+        "outputPath": "C:\\Development-Personal\\dependous\\tests\\Dependous.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\jtully\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -174,19 +257,20 @@
           "net6.0"
         ],
         "sources": {
-          "C:\\LocalNuget": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/legacyhss/_packaging/IME/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
-                "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj"
+              "C:\\Development-Personal\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj": {
+                "projectPath": "C:\\Development-Personal\\dependous\\src\\Dependous.Autofac\\Dependous.Autofac.csproj"
               },
-              "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj": {
-                "projectPath": "C:\\Development-OpenSource\\dependous\\src\\Dependous\\Dependous.csproj"
+              "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj": {
+                "projectPath": "C:\\Development-Personal\\dependous\\src\\Dependous\\Dependous.csproj"
               }
             }
           }
@@ -206,7 +290,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -218,7 +303,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

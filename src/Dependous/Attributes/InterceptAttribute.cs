@@ -22,14 +22,14 @@ namespace Dependous.Attributes
         {
             if (interceptor == null)
             {
-                throw new ArgumentException("You specify  one interceptor");
+                throw new ArgumentException("You must specify  one interceptor");
             }
 
             Interceptor = interceptor;
         }
 
         /// <summary>
-        /// Gets the interfaces.
+        /// Gets the type of the Interceptor
         /// </summary>
         /// <value>
         /// The interfaces.

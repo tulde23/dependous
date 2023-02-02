@@ -72,8 +72,8 @@ function logger(){
 }
 
 if( $configuration -eq "DEBUG"  -or $configuration -eq "debug"){
-	RemoveExistingNuGetPackages
-	GenerateNugetPackage
+	#RemoveExistingNuGetPackages
+	#GenerateNugetPackage
 	if( [string]::IsNullOrEmpty($nugetPath) -eq $false){
 		DeployToLocalNuGetShare
 		DeleteNuGetPackageFolder

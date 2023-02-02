@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using Dependous.Configuration;
-    using Dependous.Contracts;
 
     /// <summary>
     /// Provides configuration options for Dependous

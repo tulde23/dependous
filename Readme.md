@@ -1,12 +1,13 @@
 # Dependous
 *A lightweight cross platform dependency scanning library*
 
-Dependous grants you the power to insepct a collection of .NET assemblies and extract types implementing specific interfaces.  That's it.  Simple and easy.  
+Pronounced *dee-pend-us*, 
+Dependous grants you the power to inspect a collection of .NET assemblies and extract types implementing specific interfaces.  That's it.  Simple and easy.  
 
-Dependous eliminates the need to explictly describe  different types of dependencies you wish to locate.  Instead Dependeous allows you define your dependencies as you develop your 
+Dependous eliminates the need to explicitly describe  different types of dependencies you wish to locate.  Instead Dependeous allows you define your dependencies as you develop your 
 classes with a "think about it once and forget about it" approach by employing discovery interfaces. 
 
-A discovery interface can be any .NET interface.  Dependous implements three intefaces that are specific to IOC container lifetime management.
+A discovery interface can be any .NET interface.    Dependous implements five interfaces that are specific to IOC container lifetime management.
 
 **ITransientDependency**
 Designates an implementor as a discoverable dependency and asserts it's lifetime management should be transient.
@@ -36,6 +37,22 @@ var scanner     = DependencyScannerFactory.Create();
 var scanResult = scanner.Scan((f) => f.StartsWith("MyAssembly"));
 ```
 
+
+
+##### Adding Additional Discovery Interfaces #####
+``` csharp
+Action<IDependousConfiguration> configurationBuilder = (config) =>
+{
+  config.AddAdditionalDiscoveryTypes(d => d.RegisterType<IMyService1>(ServiceLifetime.Singleton)
+                                           .RegisterType<IMyService2>(ServiceLifetime.Singleton));
+  configurationBuilder?.Invoke(config);
+};
+var scanner     = DependencyScannerFactory.Create();
+var scanResult = scanner.Scan((f) => f.StartsWith("MyAssembly"),configurationBuilder );
+```
+In addition to the five default discovery interfaces, this example will register two additional discovery interfaces `IMyService1` and `IMyService2`.  Now when the scanner executes,
+any class implementing `IMyService1` or `IMyService2` will be discovered as a dependency with a lifetime of singleton.
+
 ##### Register a concrete type #####
 ```
 public class MyModel : ISelfTransient{
@@ -44,22 +61,8 @@ public class MyModel : ISelfTransient{
     }
 }
 
-now you can inject MyModel wherever you please.
+This registration will allow you to inject new instances of a concrete type.
 ```
-
-##### Adding Additional Discovery Interfaces #####
-``` csharp
-Action<IDependousConfiguration> configurationBuilder = (config) =>
-{
-  config.AddAdditionalDiscoveryTypes(d => d.RegisterType<IModule>(ServiceLifetime.Singleton)
-                                           .RegisterType<IRegistrationSource>(ServiceLifetime.Singleton));
-  configurationBuilder?.Invoke(config);
-};
-var scanner     = DependencyScannerFactory.Create();
-var scanResult = scanner.Scan((f) => f.StartsWith("MyAssembly"),configurationBuilder );
-```
-In addition to the three default discovery interfaces, this example will register two additional discovery interfaces `IModule` and `IRegistrationSource`.  Now when the scanner executes,
-any class implementing `IModule` or `IRegistrationSource` will be discovered as a dependency.
 
 ##### Using A Default Discovery Interface #####
 
@@ -96,7 +99,7 @@ Additionally, if you need to have a different assembly filter, you can pass it a
     Assert.True(result.Metadata.Any());
 ```
 ##### Accessing Dependous scan results
-In some scenarios, you may want to inspect the collected dependcy metadata from a Dependous scan.  
+In some scenarios, you may want to inspect the collected dependency metadata from a Dependous scan.  
 ``` csharp
 var scanner     = DependencyScannerFactory.Create();
 var scanResult = scanner.Scan((f) => f.StartsWith("MyAssembly"),cb=>cb.PersistScanResults=true );
@@ -130,7 +133,7 @@ using Microsoft.Extensions.Hosting;
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .UseAutoFacContainer(AssemblyPaths.From("Dependous"), logger: (o) => Console.WriteLine($"{o}"))
+            .UseAutoFacContainer(AssemblyPaths.From("Your assembly prefix"), logger: (o) => Console.WriteLine($"{o}"))
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
@@ -184,43 +187,6 @@ So for example:
     }
 }
 ```
-If you don't like using framework dependent constructs like `IIndex`, you can always implement a chain of command pattern using a custom selection strategy like so:
-``` csharp
- public interface IMultipleConsumers{
-    bool CanHandle(object data);
- }
- public class Consumer1 : IMultipleConsumers, ISingletonDependency{
-    public bool CanHandle(object data){
-        if( data is int){
-          return true; 
-    }
-        return false;
-   }
- }
- public class Consumer2 : IMultipleConsumers, ISingletonDependency{
-    public bool CanHandle(object data){
-        if( data is string){
-        return true; 
-    }
-return false;
-    }
-}
-
-public class ConsumerFactory : IConsumerFactory{
-    
-            private readonly IEnumerable<Func<IMultipleConsumers>> consumerResolver;
-       public ConsumerFactory( IEnumerable<Func<IMultipleConsumers>> consumerResolver){
-            //passing a func<T> allows you to lazy load your dependency
-            this.consumerResolver = consumerResolver;
-        }
-    public IMultipleConsumers Resolve(object data){
-             return this.consumerResolver.Find(x=>x().CanHandle(data));
-    }
-}
-```
-
-
-
 ### Implement a Decorator With AutoFac
 
 Decoration can be achieved quite easily by implementing a specific interface, `IDecorator`
@@ -256,5 +222,63 @@ public class DecoratorOfTrueService : IDecoratableService, IDecorator<IDecoratab
             return sb.ToString();
         }
 }
+
+```
+
+##### .NET 6 Web Application
+
+``` csharp
+
+#Program.cs
+global using Dependous;
+global using Microsoft.Extensions.DependencyInjection;
+
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseDependousAutofac(AssemblyPaths.From("Your Pattern"), logger: (o) => Console.WriteLine($"{o}"));
+...
+builder.Services.AddDependencyScanning();
+
+```
+
+
+##### .NET 6 Generic Host
+
+``` csharp
+
+#Program.cs
+global using Dependous;
+global using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+            
+var builder = Host.CreateDefaultBuilder(args)
+                  .UseAutoFacContainer(AssemblyPaths.From("Your Pattern"), logger: (o) => Console.WriteLine($"{o}"));
+                  
+...
+builder.Services.AddDependencyScanning();
+
+```
+
+##### .NET 6 Generic Host Custom Container Registration
+
+``` csharp
+
+#Program.cs
+global using Dependous;
+global using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+            
+var builder = Host.CreateDefaultBuilder(args)
+                  .UseAutoFacContainer(AssemblyPaths.From("Your Pattern"), logger: (o) => Console.WriteLine($"{o}"),
+                  containerBuilder: (c) =>{
+               
+                        //now you have full access to the AutoFac container and can do whatever you like.
+                    
+                     });
+                  
+...
+builder.Services.AddDependencyScanning();
 
 ```

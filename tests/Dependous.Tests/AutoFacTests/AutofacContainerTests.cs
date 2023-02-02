@@ -2,7 +2,6 @@
 using System.Linq;
 using Autofac;
 using Castle.DynamicProxy;
-using Dependous.Contracts;
 using Dependous.Models;
 using Dependous.Test;
 using FluentAssertions;
@@ -82,12 +81,12 @@ namespace Dependous.AutoFacTests
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<MyObject>();
             serviceCollection.AddSingleton(new TestObject());
-            serviceCollection.AddDependencyScanning( b=>b.AddSingleton<MyObject>().AddSingleton( new TestObject() ));
+            serviceCollection.AddDependencyScanning(b => b.AddSingleton<MyObject>().AddSingleton(new TestObject()));
             container = serviceCollection.BuildAutoFacContainer(AssemblyPaths.From("Dependous"),
                 logger: (item) => { output.WriteLine($"{item}"); Console.WriteLine(item); }, configurationBuilder: (cb) =>
                  {
                      cb.PersistScanResults = true;
-                   //  cb.InterceptAll<DynamicInterceptor>();
+                     //  cb.InterceptAll<DynamicInterceptor>();
                      cb.AddProbingPaths(pb => pb.AddProbingPath("../../../../../tests/Dependous.Probing/bin/Debug/netstandard2.1", (p) => p.StartsWith("Dependous.Probing")));
                  });
         }
@@ -177,6 +176,5 @@ namespace Dependous.AutoFacTests
 
     public class Hello : ISelfTransient
     {
-       
     }
 }

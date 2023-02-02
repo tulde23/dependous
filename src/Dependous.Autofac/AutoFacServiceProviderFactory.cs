@@ -89,6 +89,7 @@ namespace Dependous.Autofac
         public ContainerBuilder CreateBuilder(IServiceCollection services)
         {
             var builder = _decorateer.CreateBuilder(services);
+          
             PopulateAutoFacContainer(services, builder, _configurationBuilder, _logger);
             return builder;
         }

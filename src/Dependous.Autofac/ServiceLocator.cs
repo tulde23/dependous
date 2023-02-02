@@ -1,7 +1,8 @@
-﻿using Autofac.Features.Indexed;
+﻿using System;
+using Autofac.Features.Indexed;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace System
+namespace Dependous
 {
     /// <summary>
     /// Implements the service locator anit-pattern.  Please use this sparingly.
