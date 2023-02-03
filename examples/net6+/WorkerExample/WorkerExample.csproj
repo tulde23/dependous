@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-WorkerExample-0a10e6df-6ff0-4813-bab5-fdff126a6cab</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Dependous.Autofac\Dependous.Autofac.csproj" />
+    <ProjectReference Include="..\..\..\src\Dependous\Dependous.csproj" />
+    <ProjectReference Include="..\ExamplesCommon\ExamplesCommon.csproj" />
+  </ItemGroup>
+</Project>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Dependous.Models
 {
@@ -127,6 +128,32 @@ namespace Dependous.Models
             {
                 _assemblies.Add(assembly);
             }
+        }
+
+        public override string ToString()
+        {
+            //list all scanned assemblies.
+
+            var sb = new StringBuilder();
+
+            var linePattern = "Dependency: {0,-75}|{1,-17}";
+            var dependencies = new StringBuilder();
+            dependencies.AppendLine();
+            foreach (var metadata in Metadata.OrderBy(x => x.DependencyType.Name))
+            {
+                var name = metadata.DependencyType.FullName;
+                var named = metadata.NamedDependency?.ToString();
+                var assembly = metadata.DependencyType.Assembly.GetName().Name;
+                if (named != null)
+                {
+                    dependencies.AppendLine($"Named Dependency: {named}");
+                }
+                dependencies.AppendLine(string.Format(linePattern, $"{name}", $"Lifetime:{metadata.ServiceLifetime}"));
+
+                dependencies.AppendLine("\tImplements: " + string.Join("|", metadata.ImplementedInterfaces.Select(x => $"{x.FullName}")));
+            }
+            sb.AppendLine(dependencies.ToString());
+            return sb.ToString();
         }
     }
 }
