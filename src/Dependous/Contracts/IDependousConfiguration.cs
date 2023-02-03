@@ -21,6 +21,14 @@ namespace Dependous
         bool PersistScanResults { get; set; }
 
         /// <summary>
+        /// If true, attempts to the registration code.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [generate registration code]; otherwise, <c>false</c>.
+        /// </value>
+        bool GenerateRegistrationCode { get; set; }
+
+        /// <summary>
         /// Gets the additional types.
         /// </summary>
         /// <value>

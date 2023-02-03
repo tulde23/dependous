@@ -46,6 +46,14 @@
         public bool PersistScanResults { get; set; }
 
         /// <summary>
+        /// If true, attempts to the registration code.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [generate registration code]; otherwise, <c>false</c>.
+        /// </value>
+        public bool GenerateRegistrationCode { get; set; }
+
+        /// <summary>
         /// Gets or sets the probing paths. These are used to discover assemblies not in bin.
         /// Essentially implements a "plug-in" mechanism.
         /// </summary>

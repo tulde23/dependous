@@ -36,5 +36,13 @@
         /// The named dependency.
         /// </value>
         public object DependencyKey { get; set; }
+
+        /// <summary>
+        /// Gets or sets the debug.
+        /// </summary>
+        /// <value>
+        /// The debug.
+        /// </value>
+        public string Debug { get; set; }
     }
 }

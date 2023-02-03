@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Autofac.Core;
@@ -23,7 +22,8 @@ namespace Dependous.Autofac.Rules
                 if (module != null)
                 {
                     Builder.RegisterModule(module);
-                    return new RegistrationResult(this, true, Produce(new DependencyRegistration { DependencyTypeName = dependencyMetadata.DependencyType.Name }));
+                    var text = $"builder.RegisterModule<{dependencyMetadata.DependencyType.FullName}>()";
+                    return new RegistrationResult(this, true, Produce(new DependencyRegistration { DependencyTypeName = dependencyMetadata.DependencyType.Name, Debug = text }));
                 }
             }
             return new RegistrationResult(this, false);

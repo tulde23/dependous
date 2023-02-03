@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Autofac;
 using Dependous.Autofac.Models;
 
@@ -28,7 +25,8 @@ namespace Dependous.Autofac.Rules
                     Builder.RegisterDecorator(dependencyMetadata.DependencyType, trueType);
                     //we are using AutoFac's module registration
                     // var rb = Builder.RegisterType(dependencyMetadata.DependencyType.AsType()).AsSelf();
-                    return new RegistrationResult(this, true, Produce(new DependencyRegistration { DependencyTypeName = dependencyMetadata.DependencyType.Name }));
+                    var text = $"builder.RegisterDecorator<{dependencyMetadata.DependencyType.FullName},{trueType.FullName}>()";
+                    return new RegistrationResult(this, true, Produce(new DependencyRegistration { DependencyTypeName = dependencyMetadata.DependencyType.Name, Debug = text }));
                 }
             }
 

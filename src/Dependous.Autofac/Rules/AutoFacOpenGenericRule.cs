@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Autofac;
 
 //using Autofac.Extras.DynamicProxy;
@@ -25,6 +26,7 @@ namespace Dependous.Autofac.Rules
             {
                 var genericInterfaces = dependencyMetadata.ImplementedInterfaces.Where(x => x.IsGenericType);
                 var results = new List<DependencyRegistration>(genericInterfaces.Count());
+                var sb = new StringBuilder();
                 foreach (var interfaceType in genericInterfaces)
                 {
                     var rb = Builder.RegisterGeneric(dependencyMetadata.DependencyType);
