@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using Dependous.Attributes;
 
     /// <summary>
     /// A class used to define an additional discovery interface to be used by the scanner.
     /// </summary>
-    public sealed class AdditionalDiscoveryType : IEqualityComparer<AdditionalDiscoveryType>
+    public class AdditionalDiscoveryType : IEqualityComparer<AdditionalDiscoveryType>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AdditionalDiscoveryType"/> class.
@@ -55,5 +56,15 @@
         {
             return 1;
         }
+    }
+
+    public class AdditionalDiscoveryType<T> : AdditionalDiscoveryType where T : Attribute
+    {
+        public AdditionalDiscoveryType(Func<T, DependencyAttribute> attributeMapper)
+        {
+            AttributeMapper = attributeMapper;
+        }
+
+        public Func<T, DependencyAttribute> AttributeMapper { get; }
     }
 }

@@ -30,6 +30,7 @@ namespace ConsoleExample
             return true;
         }
     }
+    
 
     public class MethodCallInterceptorDecorator : IPostalCodeService, IDecorator<IPostalCodeService>, ISingletonDependency
     {

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Autofac;
-using Autofac.Core;
-using Autofac.Core.Resolving.Pipeline;
-using SL = Dependous.ServiceLifetime;
+using Dependous.Unity;
+using Microsoft.Practices.Unity;
 
-namespace Dependous.Autofac
+namespace Dependous.Unity
 {
     /// <summary>
     ///
     /// </summary>
-    internal static class AutofacContainerFactory
+    internal static class UnityContainerFactory
+
     {
         /// <summary>
-        /// Scans for dependencies and builds the autofac container.
+        /// Scans for dependencies and builds the unity container.
         /// </summary>
         /// <param name="patternBuilder">The pattern builder.</param>
         /// <param name="dependencyScanner">The dependency scanner.  If null, uses the default scanner</param>
@@ -23,13 +22,13 @@ namespace Dependous.Autofac
         /// <param name="containerConfigurator">The container configurator.</param>
         /// <returns></returns>
         /// <exception cref="System.InvalidOperationException">No dependency scanner registered.  Make sure you call AddDependencyScanning before calling this method</exception>
-        public static IContainer BuildContainer(
+        public static IUnityContainer BuildContainer(
 
             Func<AssemblySearchPatternFactory, AssemblySearchPatternFactory> patternBuilder = null,
             Func<IDependencyScanner> dependencyScanner = null,
             Action<IDependousConfiguration> configurationBuilder = null,
             Action<object> logger = null,
-            Action<ContainerBuilder, IReadOnlyCollection<DependencyMetadata>> containerConfigurator = null)
+            Action<IUnityContainer, IReadOnlyCollection<DependencyMetadata>> containerConfigurator = null)
         {
             logger = logger ?? ((x) => { });
             dependencyScanner = dependencyScanner ?? (() => DependencyScannerFactory.Create());
@@ -40,10 +39,6 @@ namespace Dependous.Autofac
             }
             Action<IDependousConfiguration> internalBuilder = (config) =>
             {
-                //automatically discovers AutoFac modules and Sources as well any DLR dynamic types
-                config.AddAdditionalDiscoveryTypes(d => d.RegisterType<IModule>(SL.Singleton)
-                                                                            .RegisterType<IResolveMiddleware>(SL.Transient)
-                                                                                  .RegisterType<IRegistrationSource>(SL.Singleton));
                 configurationBuilder?.Invoke(config);
             };
             var scanResults = scanner.Scan(patternBuilder, internalBuilder, logger);
@@ -58,7 +53,7 @@ namespace Dependous.Autofac
                 }
             }
 
-            var containerRegistrationService = new AutoFacContainerRegistrationService(scanResults.Configuration);
+            var containerRegistrationService = new UnityContainerRegistrationService(new UnityServiceProvider(new UnityContainer()), scanResults.Configuration);
             if (scanResults.Configuration.PersistScanResults)
             {
                 containerRegistrationService.Builder.RegisterInstance(scanResults);
@@ -67,7 +62,7 @@ namespace Dependous.Autofac
             var allRegistrations = containerRegistrationService.RegisterAll(scanResults.Metadata);
             logger($"Registered {allRegistrations.Count()} dependencies.");
 
-            var container = containerRegistrationService.Builder.Build();
+            var container = containerRegistrationService.Builder;
             return container;
         }
     }

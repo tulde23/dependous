@@ -47,7 +47,10 @@ namespace Dependous.Autofac.Rules
                     else
                     {
                         rb.As(interfaceType);
+                   
                     }
+
+                  
 
                     //user has defined interception
                     if (dependencyMetadata.Interceptor != null)

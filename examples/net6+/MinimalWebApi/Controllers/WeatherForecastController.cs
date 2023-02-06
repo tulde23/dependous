@@ -21,7 +21,7 @@ public class WeatherForecastController : ControllerBase
     private readonly IMyService myService;
     private readonly MySingleton mySingleton;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IEnumerable<IWeatherService> weatherServices,
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IEnumerable<IWeatherService> weatherServices, 
         IIndex<DependencyNames, IWeatherService> serviceMap,
         IPostalCodeService postalCodeService)
     {

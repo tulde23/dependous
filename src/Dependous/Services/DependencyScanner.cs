@@ -4,8 +4,8 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
-    using System.Threading.Tasks;
     using Dependous.Attributes;
+    using Dependous.Extensions;
     using Dependous.Models;
 
     /// <summary>
@@ -52,9 +52,11 @@
             configurationBuilder(configuration);
             var assemblyResult = assemblyLocator.Locate(assemblyNameFilter, configuration);
             assemblyResult.Duration = stopwatch.Elapsed;
-
+            var attributeScanning = configuration.GetAttributeScanningConfiguration();
             var scanResult = new DependencyScanResult();
-            Parallel.ForEach(assemblyResult.DiscoveredAssemblyNames,
+
+            assemblyResult.DiscoveredAssemblyNames.ToList().ForEach(
+            //Parallel.ForEach(assemblyResult.DiscoveredAssemblyNames,
                 (assemblyName) =>
                 {
                     logger?.DynamicInvoke($"Inspecting Assembly {assemblyName.FullName}");
@@ -69,9 +71,29 @@
                         var dependencyType = type.GetTypeInfo();
                         var allImplementedInterfaces = dependencyType.ImplementedInterfaces;
 
+                        if (attributeScanning.enabled)
+                        {
+                            var attribute = type.GetCustomAttribute(attributeScanning.attributeType);
+                            if (attribute != null)
+                            {
+                                Delegate d = attributeScanning.mapper as Delegate;
+                                var result = d.DynamicInvoke(attribute) as DependencyAttribute;
+                                if (result != null)
+                                {
+                                    scanResult.AddMetadata(new DependencyMetadata(null,
+                                                                                  allImplementedInterfaces,
+                                                                                  dependencyType,
+                                                                                  result.LifeTime,
+                                                                                  attribute.GetType().GetTypeInfo(),
+                                                                                  null));
+                                }
+                                continue;
+                            }
+                        }
+
                         //grab the interface used to register this dependency.  We'll use it later to determine the lifetime manager
-                        var discoveryInterface = allImplementedInterfaces.FirstOrDefault(i => configuration.AdditionalTypes.Any(x => x.InterfaceType.Equals(i)));
-                        serviceLifetime = configuration.AdditionalTypes.Where(x => x.InterfaceType.Equals(discoveryInterface)).Select(x => x.ServiceLifetime).FirstOrDefault();
+                        var discoveryInterface = allImplementedInterfaces.FirstOrDefault(i => configuration.AdditionalTypes.Any(x => x.InterfaceType?.Equals(i) == true));
+                        serviceLifetime = configuration.AdditionalTypes.Where(x => x.InterfaceType?.Equals(discoveryInterface) == true).Select(x => x.ServiceLifetime).FirstOrDefault();
 
                         //lets see if the user passed any custom discovery interfaces.   Only if they didn't already declare a discovery interface
                         if (discoveryInterface == null)

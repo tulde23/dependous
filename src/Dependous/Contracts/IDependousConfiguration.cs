@@ -52,6 +52,8 @@ namespace Dependous
         /// </value>
         IEnumerable<ProbingPath> ProbingPaths { get; }
 
+        
+
         /// <summary>
         /// Registers additional discovery type interfaces.
         /// </summary>

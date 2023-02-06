@@ -9,4 +9,10 @@ namespace Dependous.Test
     {
 
     }
+
+
+    public class SingletonInstance : ISelfSingleton
+    {
+
+    }
 }

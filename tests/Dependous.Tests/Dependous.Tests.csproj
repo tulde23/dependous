@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dependous.Autofac\Dependous.Autofac.csproj" />
+    <ProjectReference Include="..\..\src\Dependous.Microsoft.Extensions.DependencyInjection\Dependous.Microsoft.Extensions.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\src\Dependous\Dependous.csproj" />
     <ProjectReference Include="..\Dependous.Test.Common\Dependous.Test.Common.csproj" />
   </ItemGroup>

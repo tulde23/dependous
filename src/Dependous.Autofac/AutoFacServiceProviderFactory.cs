@@ -2,6 +2,7 @@
 using System.Linq;
 using Autofac;
 using Autofac.Core;
+using Autofac.Core.Resolving.Pipeline;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using SL = Dependous.ServiceLifetime;
@@ -61,7 +62,8 @@ namespace Dependous.Autofac
             {
                 //automatically discovers AutoFac modules and Sources as well any DLR dynamic types
                 config.AddAdditionalDiscoveryTypes(d => d.RegisterType<IModule>(SL.Singleton)
-                                                                                  .RegisterType<IRegistrationSource>(SL.Singleton));
+                                                                            .RegisterType<IResolveMiddleware>(SL.Transient)
+                                                                            .RegisterType<IRegistrationSource>(SL.Singleton));
                 configurationBuilder?.Invoke(config);
             };
             var scanResults = scanner.Scan(patternBuilder, internalBuilder, logger);

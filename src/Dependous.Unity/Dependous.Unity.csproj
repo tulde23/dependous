@@ -7,7 +7,7 @@
 		<Company>PMOAKMFU</Company>
 		<Product>Dependous.Unity</Product>
 		<Description>
-			Adds some nice visualizations 
+			Implemented container integration for Unity.  
 		</Description>
 		<PackageLicenseUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageLicenseUrl>
 		<PackageProjectUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageProjectUrl>
@@ -27,9 +27,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Contracts\" />
-	  <Folder Include="Extensions\" />
-	  <Folder Include="Models\" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Unity" Version="4.0.1" />
+		<PackageReference Include="Unity.AspNet.WebApi" Version="4.0.1" />
+		<PackageReference Include="Unity.Mvc" Version="4.0.1" />
+
+
 	</ItemGroup>
 
 </Project>

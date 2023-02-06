@@ -19,9 +19,9 @@
     <PackageTags>Scanning, Dependency, IOC</PackageTags>
     <PackageReleaseNotes>core3.1 release
 bug fix: https://github.com/autofac/Autofac/commit/1bbcc0677d00e2af9328067de8724c5563286e5a</PackageReleaseNotes>
-    <AssemblyVersion>7.0.0.0</AssemblyVersion>
-    <FileVersion>7.0.0.0</FileVersion>
-    <Version>7.0.0</Version>
+    <AssemblyVersion>7.0.0.1</AssemblyVersion>
+    <FileVersion>7.0.0.1</FileVersion>
+    <Version>7.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <!-- Conditionally obtain references for the .NET Framework netstandard2.0 target -->

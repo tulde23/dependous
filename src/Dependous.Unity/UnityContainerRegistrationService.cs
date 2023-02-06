@@ -1,57 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Autofac;
-using Dependous.Autofac.Contracts;
-using Dependous.Autofac.Models;
-using Dependous.Autofac.Rules;
+using Dependous.Unity;
+using Dependous.Unity.Contracts;
+using Dependous.Unity.Models;
+using Dependous.Unity.Rules;
+using Microsoft.Practices.Unity;
 
 namespace Dependous
 {
     /// <summary>
-    /// Provides an AutoFac specific container registration service. Of note is the ability to
+    /// Provides an Unity specific container registration service. Of note is the ability to
     /// register multiple implementations of the same interface distinguished by name.
     /// </summary>
     /// <seealso cref="IContainerRegistrationService"/>
-    internal class AutoFacContainerRegistrationService
+    internal class UnityContainerRegistrationService
     {
         private readonly List<Type> ruleTypes = new List<Type>(4)
         {
-            typeof(AutoFacModuleRegistrationRule),
-            typeof(AutoFacRegistrationSourceRule),
-            typeof(AutoFacRegistrationRule),
+            typeof(UnityRegistrationRule),
             typeof(SelfRule),
-            typeof(AutoFacDecoratorRule)
         };
 
         /// <summary>
 
         /// The builder </summary>
-        public ContainerBuilder Builder { get; private set; }
+        public IUnityContainer Builder => serviceProvider.LifetimeScope;
 
+        private readonly UnityServiceProviderDecorator serviceProvider;
         private readonly IDependousConfiguration _dependousConfiguration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutoFacContainerRegistrationService"/> class.
+        /// Initializes a new instance of the <see cref="UnityContainerRegistrationService"/> class.
         /// </summary>
-        public AutoFacContainerRegistrationService(IDependousConfiguration dependousConfiguration) : this(new ContainerBuilder())
+        public UnityContainerRegistrationService(UnityServiceProviderDecorator serviceProvider, IDependousConfiguration dependousConfiguration)
         {
+            this.serviceProvider = serviceProvider;
             _dependousConfiguration = dependousConfiguration;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AutoFacContainerRegistrationService"/> class.
-        /// </summary>
-        /// <param name="builder">The builder.</param>
-        public AutoFacContainerRegistrationService(ContainerBuilder builder)
-        {
-            this.Builder = builder;
-        }
-
-        public AutoFacContainerRegistrationService(ContainerBuilder builder, IDependousConfiguration dependousConfiguration)
-        {
-            _dependousConfiguration = dependousConfiguration;
-            Builder = builder;
         }
 
         /// <summary>
@@ -66,7 +51,7 @@ namespace Dependous
             var allResults = new List<RegistrationResult>();
             foreach (var metadata in dependencyMetadata)
             {
-                var registrationResults = rules.Select(x => x.Register(metadata));
+                var registrationResults = rules.Select(x => x.Register(new RegistrationRuleContext(serviceProvider, _dependousConfiguration, metadata)));
                 allResults.AddRange(registrationResults);
             }
             return allResults.SelectMany(x => x.Registrations);
@@ -76,11 +61,9 @@ namespace Dependous
         /// Creates the container. Call this method after Register.
         /// </summary>
         /// <returns></returns>
-        public IContainer CreateContainer()
+        public IUnityContainer CreateContainer()
         {
-            var container = this.Builder.Build();
-
-            return container;
+            return this.Builder;
         }
     }
 }

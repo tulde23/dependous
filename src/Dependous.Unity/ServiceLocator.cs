@@ -1,5 +1,4 @@
 ﻿using System;
-using Autofac.Features.Indexed;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dependous
@@ -28,18 +27,6 @@ namespace Dependous
         public static T Resolve<T>()
         {
             return _serviceProvider.GetService<T>();
-        }
-
-        /// <summary>
-        /// Resolves instance by name dependency
-        /// </summary>
-        /// <param name="dependencyName"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T Resolve<T>(string dependencyName)
-        {
-            var context = _serviceProvider.GetService<IIndex<string, T>>();
-            return context[dependencyName];
         }
     }
 }

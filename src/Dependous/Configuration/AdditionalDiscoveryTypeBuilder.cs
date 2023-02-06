@@ -1,7 +1,9 @@
 ﻿namespace Dependous
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Dependous.Attributes;
 
     /// <summary>
     /// Builds up a collection of additional targets using a fluent syntax.  If you require additional discovery interfaces beyond the default 3
@@ -38,6 +40,12 @@
                 InterfaceType = typeof(T),
                 ServiceLifetime = serviceLifetime
             });
+            return this;
+        }
+
+        public AdditionalDiscoveryTypeBuilder RegisterAttribute<T>(Func<T, DependencyAttribute> mapper) where T : Attribute
+        {
+            this.additionalDiscoveryTypes.Add(new AdditionalDiscoveryType<T>(mapper));
             return this;
         }
 
