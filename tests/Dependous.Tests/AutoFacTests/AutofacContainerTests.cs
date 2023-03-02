@@ -2,6 +2,7 @@
 using System.Linq;
 using Autofac;
 using Castle.DynamicProxy;
+using Dependous.Attributes;
 using Dependous.Models;
 using Dependous.Test;
 using FluentAssertions;
@@ -147,6 +148,15 @@ namespace Dependous.AutoFacTests
             var results = container.Resolve<DependencyScanResult>();
             Assert.NotNull(results);
         }
+
+        [Fact(DisplayName = "Integration Test - Tests Interception")]
+        public void InterceptionShould()
+        {
+            var results = container.Resolve<IncerceptableService>();
+
+            var data = results.Invoke();
+            Assert.NotNull(data);
+        }
     }
 
     public class MyObject
@@ -178,3 +188,6 @@ namespace Dependous.AutoFacTests
     {
     }
 }
+
+ 
+

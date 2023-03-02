@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using Autofac;
 using Autofac.Core.Resolving.Pipeline;
+using Autofac.Extras.DynamicProxy;
 using Dependous.Autofac.Models;
 
 namespace Dependous.Autofac.Rules
@@ -26,7 +27,8 @@ namespace Dependous.Autofac.Rules
             foreach (var interfaceType in dependencyMetadata.ImplementedInterfaces.Where(x => !x.Equals(typeof(IResolveMiddleware))))
             {
                 var namedDependency = dependencyMetadata.NamedDependency;
-
+                
+               
                 var rb = Builder.RegisterType(dependencyMetadata.DependencyType.AsType());
                 this.SetLifetime(dependencyMetadata.ServiceLifetime, rb);
 
@@ -54,6 +56,7 @@ namespace Dependous.Autofac.Rules
 
                     sb.AppendLine(text);
                 }
+                
                 else
                 {
                     var text = $"builder.RegisterType<{dependencyMetadata.DependencyType.FullName}>(){lifeTime}.As<{interfaceType.FullName}>()";
@@ -66,8 +69,8 @@ namespace Dependous.Autofac.Rules
                 //user has defined interception
                 if (dependencyMetadata.Interceptor != null)
                 {
-                    // rb.EnableClassInterceptors();
-                    //  rb.InterceptedBy(dependencyMetadata.Interceptor);
+                     rb.EnableClassInterceptors();
+                     rb.InterceptedBy(dependencyMetadata.Interceptor);
                     Builder.RegisterType(dependencyMetadata.Interceptor);
                 }
 

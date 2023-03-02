@@ -53,6 +53,27 @@ var scanResult = scanner.Scan((f) => f.StartsWith("MyAssembly"),configurationBui
 In addition to the five default discovery interfaces, this example will register two additional discovery interfaces `IMyService1` and `IMyService2`.  Now when the scanner executes,
 any class implementing `IMyService1` or `IMyService2` will be discovered as a dependency with a lifetime of singleton.
 
+##### Configuring Attributes #####
+You can also choose to use attributes instead of interfaces.  This feature was added to make integrating into other platforms easier.
+
+``` csharp
+[Dependency(typeof(IAttributeInterface), ServiceLifetime.Singleton, false)]
+public class AttributeImplementation : IAttributeInterface
+{
+}
+...
+Action<IDependousConfiguration> configurationBuilder = (config) =>
+{
+//this code allows you to map your attribute to our attribute.  
+  config.AddAdditionalDiscoveryTypes(x => x.RegisterAttribute<DependencyAttribute>((d) =>
+                    {
+                        return new DependencyAttribute(d.ResolveType, d.LifeTime, d.EnumerationOnly);
+                    }));
+                    //if you use our attribute, you can just use 
+   config.AddAdditionalDiscoveryTypes(x => x.RegisterAttribute()));
+};
+```
+
 ##### Register a concrete type #####
 ```
 public class MyModel : ISelfTransient{
@@ -61,7 +82,7 @@ public class MyModel : ISelfTransient{
     }
 }
 
-This registration will allow you to inject new instances of a concrete type.
+This registration will allow you to inject new instances of a concrete type.  You can register your instance as ISelfTransient, ISelfScoped or ISelfSingleton
 ```
 
 ##### Using A Default Discovery Interface #####
@@ -223,6 +244,42 @@ public class DecoratorOfTrueService : IDecoratableService, IDecorator<IDecoratab
         }
 }
 
+
+
+
+```
+
+### Implement an Interceptor In AutoFac with Castle Proxy
+
+If you decorate your dependency with an Intercept attribute, you can configure class interception with Castle.DynamicProxy.  Try not to use this.  It's slow.
+```
+public interface IncerceptableService
+    {
+        public string Invoke();
+    }
+  [Intercept(typeof(LoggingInterceptor))]
+    public  class DoNothingIncerceptableService : IncerceptableService, ITransientDependency
+    {
+        public virtual  string Invoke()
+        {
+            return "true method call";
+        }
+    }
+  public class LoggingInterceptor : IInterceptor
+    {
+        public void Intercept(IInvocation invocation)
+        {
+            Console.Write("Calling method {0} with parameters {1}... ",
+     invocation.Method.Name,
+     string.Join(", ", invocation.Arguments.Select(a => (a ?? "").ToString()).ToArray()));
+
+            var test = "before";
+            invocation.Proceed();
+            var test2 = "after";
+            invocation.ReturnValue = $"{test} {invocation.ReturnValue} {test2}";
+            Console.WriteLine("Done: result was {0}.", invocation.ReturnValue);
+        }
+    }
 ```
 
 ##### .NET 6 Web Application

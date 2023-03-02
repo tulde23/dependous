@@ -98,5 +98,7 @@
         /// The interceptor.
         /// </value>
         public TypeInfo Decorator { get; private set; }
+
+        public Func<IServiceProvider, object> FactoryMethod { get; }
     }
 }

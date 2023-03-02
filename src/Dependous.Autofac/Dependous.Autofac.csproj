@@ -19,9 +19,9 @@
     <PackageTags>Scanning, Dependency, IOC</PackageTags>
     <PackageReleaseNotes>core3.1 release
 bug fix: https://github.com/autofac/Autofac/commit/1bbcc0677d00e2af9328067de8724c5563286e5a</PackageReleaseNotes>
-    <AssemblyVersion>7.0.0.1</AssemblyVersion>
-    <FileVersion>7.0.0.1</FileVersion>
-    <Version>7.0.1</Version>
+    <AssemblyVersion>7.0.0.2</AssemblyVersion>
+    <FileVersion>7.0.0.2</FileVersion>
+    <Version>7.0.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <!-- Conditionally obtain references for the .NET Framework netstandard2.0 target -->
@@ -29,6 +29,8 @@ bug fix: https://github.com/autofac/Autofac/commit/1bbcc0677d00e2af9328067de8724
   <ItemGroup>
 
     <PackageReference Include="AutoFac" Version="6.5.0" />
+
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />

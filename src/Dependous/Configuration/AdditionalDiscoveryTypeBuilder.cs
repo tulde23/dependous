@@ -43,7 +43,14 @@
             return this;
         }
 
-        public AdditionalDiscoveryTypeBuilder RegisterAttribute<T>(Func<T, DependencyAttribute> mapper) where T : Attribute
+        public AdditionalDiscoveryTypeBuilder RegisterAttribute()
+        {
+            var mapper = new Func<DependencyAttribute, DependencyAttribute>((d) => new DependencyAttribute(d.ResolveType, d.LifeTime, d.EnumerationOnly));
+            this.additionalDiscoveryTypes.Add(new AdditionalDiscoveryType<DependencyAttribute>(mapper));
+            return this;
+        }
+
+        public AdditionalDiscoveryTypeBuilder RegisterAttribute<T>(Func<T, DependencyAttribute> mapper = null) where T : Attribute
         {
             this.additionalDiscoveryTypes.Add(new AdditionalDiscoveryType<T>(mapper));
             return this;

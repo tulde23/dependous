@@ -44,6 +44,11 @@ namespace Dependous.Test
         void Test();
     }
 
+    public interface IncerceptableService
+    {
+        public string Invoke();
+    }
+
     public interface INonDiscovery { }
 
     public interface IProbeMe { }

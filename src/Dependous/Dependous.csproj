@@ -6,12 +6,12 @@
       A lightweight cross platform dependency scanning library
       Dependous grants you the power to insepct a collection of .NET assemblies and extract types implementing specific interfaces. That's it. Simple and easy.
     </Description>
-    <Version>7.0.1</Version>
+    <Version>7.0.2</Version>
     <RepositoryUrl>https://bitbucket.org/bsbdevelopment/dependous/src</RepositoryUrl>
     <PackageProjectUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageProjectUrl>
     <PackageLicenseUrl>https://bitbucket.org/bsbdevelopment/dependous/src</PackageLicenseUrl>
-    <AssemblyVersion>7.0.0.1</AssemblyVersion>
-    <FileVersion>7.0.0.1</FileVersion>
+    <AssemblyVersion>7.0.0.2</AssemblyVersion>
+    <FileVersion>7.0.0.2</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
      <PackageId>Dependous</PackageId>
     <Authors>Jason Tully</Authors>
@@ -21,6 +21,7 @@
 
 
     <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 	<!--

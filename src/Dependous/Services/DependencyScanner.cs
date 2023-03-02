@@ -70,6 +70,8 @@
                     {
                         var dependencyType = type.GetTypeInfo();
                         var allImplementedInterfaces = dependencyType.ImplementedInterfaces;
+                        var interceptAttribute = type.GetCustomAttribute<InterceptAttribute>();
+                        var interceptor = dependencyType.GetCustomAttribute<InterceptAttribute>(true);
 
                         if (attributeScanning.enabled)
                         {
@@ -85,7 +87,7 @@
                                                                                   dependencyType,
                                                                                   result.LifeTime,
                                                                                   attribute.GetType().GetTypeInfo(),
-                                                                                  null));
+                                                                                  interceptor?.Interceptor?.GetTypeInfo()));
                                 }
                                 continue;
                             }
@@ -113,7 +115,7 @@
                         //grab the named dependency attribute if any
                         var namedDependency = dependencyType.GetCustomAttribute<NamedDependencyAttribute>(true);
                         //grab the interceptor attribute if it exists
-                        var interceptor = dependencyType.GetCustomAttribute<InterceptAttribute>(true);
+
                         var metadata = new DependencyMetadata(namedDependency?.Name,
                                                                                     allImplementedInterfaces,
                                                                                     dependencyType,
